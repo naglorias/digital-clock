@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #333333; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to right,
+          #dd1818,
+          #333333
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(
+          to right,
+          #dd1818,
+          #333333
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+      .digital-container {
+        width: 730px;
+        height: 330px;
+        background: rgb(0, 0, 0, 0.4);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 200px;
+      }
+      .sec {
+        margin: 2rem;
+        color: #f7eded;
+        font-size: 4em;
+        font-family: "Oswald", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="digital-container">
+      <div class="sec day"></div>
+      <div class="sec hours"></div>
+      <div class="sec minutes"></div>
+      <div class="sec am-pm"></div>
+    </div>
+  </body>
+  <script>
+    let daySection = document.querySelector(".day");
+    let hrsSection = document.querySelector(".hours");
+    let minsSection = document.querySelector(".minutes");
+    let amPmSection = document.querySelector(".am-pm");
+    let digital = () => {
+      let date = new Date();
+      let days = date.getDay();
+      let weekdays = [
+        "Sunday",
+        "Monday",
+        "Tueday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      let hrs = date.getHours();
+      let mins = date.getMinutes();
+      let calcTime = hrs >= 12 ? "PM" : "AM";
+      hrs = hrs % 12;
+      hrs = hrs ? hrs : "12";
+      hrs = hrs < 10 ? "0" + hrs : hrs;
+      mins = mins < 10 ? "0" + mins : mins;
+      daySection.textContent = weekdays[days];
+      hrsSection.textContent = hrs;
+      minsSection.textContent = mins;
+      amPmSection.textContent = calcTime;
+    };
+    setTimeout(digital, 60000);
+    digital();
+  </script>
+</html>
